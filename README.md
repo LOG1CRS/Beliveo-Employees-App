@@ -1,4 +1,4 @@
-<h1 align="center" style="padding-top: 30px"> <img src="https://github.com/LOG1CRS/Beliveo-Employees-App/blob/main/public/beliveo-logo.png" /><br />Beliveo Challenge</h1>
+<h1 align="center" style="padding-top: 30px"> <img src="https://github.com/LOG1CRS/Beliveo-Employees-App/blob/55066311958c0581f28390110f48832404b62620/public/beliveo-icon.png" /><br />Beliveo Challenge</h1>
 
 ## 📦 Introduction
 

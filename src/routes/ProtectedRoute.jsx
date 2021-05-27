@@ -3,8 +3,8 @@ import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { login } from './routes.json';
 
-const ProtectedRoutes = (props) => {
-  const { path, Component } = props;
+const ProtectedRoute = (props) => {
+  const { path, component } = props;
   const token = useSelector((store) => store.authToken);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const ProtectedRoutes = (props) => {
       exact
       render={() => {
         if (token) {
-          return <Component />;
+          return <component />;
         } else {
           return <Redirect to={login} />;
         }
@@ -26,4 +26,4 @@ const ProtectedRoutes = (props) => {
   );
 };
 
-export default ProtectedRoutes;
+export default ProtectedRoute;

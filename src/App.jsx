@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 
+import { ProtectedRoute } from './routes';
 import { routes } from './routes';
 import {
   Welcome,
@@ -21,8 +22,8 @@ const App = () => {
           <Route exact path={routes.welcome} component={Welcome} />
           <Route exact path={routes.login} component={LogIn} />
           <Route exact path={routes.signup} component={SignUp} />
-          <Route exact path={routes.dashboard} component={Dashboard} />
-          <Route exact path={routes.employees} component={Employees} />
+          <ProtectedRoute path={routes.dashboard} component={Dashboard} />
+          <ProtectedRoute path={routes.employees} component={Employees} />
           <Route component={NotFound} />
         </Switch>
       </ThemeProvider>

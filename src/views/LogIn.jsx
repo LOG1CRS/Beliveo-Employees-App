@@ -1,19 +1,25 @@
 import React from 'react';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
+import { Helmet } from 'react-helmet';
 
 const LogIn = () => {
   const classes = useStyle();
   return (
-    <Grid
-      container
-      className={classes.login}
-      justify="center"
-      alignItems="center"
-    >
-      <Typography variant="h1" align="center" style={{ fontSize: 50 }}>
-        LogIn View
-      </Typography>
-    </Grid>
+    <>
+      <Helmet>
+        <title>Beliveo App - Log In</title>
+      </Helmet>
+      <Grid
+        container
+        className={classes.login}
+        justify="center"
+        alignItems="center"
+      >
+        <Typography variant="h1" align="center" style={{ fontSize: 50 }}>
+          LogIn View
+        </Typography>
+      </Grid>
+    </>
   );
 };
 
