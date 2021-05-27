@@ -32,6 +32,7 @@ const theme = createMuiTheme({
     button: {
       fontFamily: 'Roboto',
       fontWeight: 400,
+      textTransform: 'none',
     },
   },
 });
