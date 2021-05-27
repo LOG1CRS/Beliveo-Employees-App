@@ -1,4 +1,4 @@
-<h1 align="center" style="padding-top: 30px">Dropstudio Challenge</h1>
+<h1 align="center" style="padding-top: 30px">Beliveo Challenge</h1>
 
 ## 📦 Introduction
 
