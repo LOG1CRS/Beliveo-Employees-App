@@ -1,10 +1,10 @@
-<h1 align="center" style="padding-top: 30px">Beliveo Challenge</h1>
+<h1 align="center" style="padding-top: 30px"> <img src="https://github.com/LOG1CRS/Beliveo-Employees-App/blob/main/public/beliveo-logo.png" /><br />Beliveo Challenge</h1>
 
 ## 📦 Introduction
 
 This repo is React challenge code for Beliveo.
 
-### Stack
+### 🛠 Stack
 
 - [React](https://es.reactjs.org/)
 - [Redux](https://react-redux.js.org/)
