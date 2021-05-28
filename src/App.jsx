@@ -19,24 +19,16 @@ const App = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={themeConfig}>
-        <Switch>
-          <Route exact path={routes.welcome} component={Welcome} />
-          <Route exact path={routes.login} component={LogIn} />
-          <Route exact path={routes.signup} component={SignUp} />
-          <Route component={NotFound} />
-          <Layout>
-            <ProtectedRoute
-              exact
-              path={routes.dashboard}
-              Component={Dashboard}
-            />
-            <ProtectedRoute
-              exact
-              path={routes.employees}
-              Component={Employees}
-            />
-          </Layout>
-        </Switch>
+        <Layout>
+          <Switch>
+            <Route exact path={routes.welcome} component={Welcome} />
+            <Route exact path={routes.login} component={LogIn} />
+            <Route exact path={routes.signup} component={SignUp} />
+            <ProtectedRoute path={routes.dashboard} Component={Dashboard} />
+            <ProtectedRoute path={routes.employees} Component={Employees} />
+            <Route component={NotFound} />
+          </Switch>
+        </Layout>
       </ThemeProvider>
     </BrowserRouter>
   );

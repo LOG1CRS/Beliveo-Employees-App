@@ -10,11 +10,15 @@ import {
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
+import { useSignUp } from '../hooks';
 import { signUpWallpaper } from '../assets';
 import { routes } from '../routes';
 
 const SignUp = () => {
   const classes = useStyle();
+  const [setInputName, setInputEmail, setInputPassword, handleSignUp, error] =
+    useSignUp();
+
   return (
     <>
       <Helmet>
@@ -39,23 +43,36 @@ const SignUp = () => {
                 </Typography>
               </Grid>
               <Grid item xs={12}>
+                {error !== '' ? (
+                  <Typography
+                    variant="h3"
+                    className={classes.error}
+                    align="center"
+                  >
+                    {error}
+                  </Typography>
+                ) : null}
                 <TextField
                   label="Name"
                   fullWidth
                   variant="outlined"
                   className={classes.input}
+                  onChange={(e) => setInputName(e.target.value)}
                 />
                 <TextField
                   label="Email"
                   fullWidth
                   variant="outlined"
                   className={classes.input}
+                  onChange={(e) => setInputEmail(e.target.value)}
                 />
                 <TextField
                   label="Password"
                   fullWidth
                   variant="outlined"
                   className={classes.input}
+                  onChange={(e) => setInputPassword(e.target.value)}
+                  type="password"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -65,6 +82,7 @@ const SignUp = () => {
                   fullWidth
                   size="large"
                   style={{ marginBottom: 10 }}
+                  onClick={handleSignUp}
                 >
                   Sign Up
                 </Button>
@@ -156,6 +174,11 @@ const useStyle = makeStyles((theme) => ({
       marginTop: 8,
       marginBottom: 8,
     },
+  },
+  error: {
+    fontSize: 16,
+    color: 'red',
+    marginBottom: 5,
   },
 }));
 

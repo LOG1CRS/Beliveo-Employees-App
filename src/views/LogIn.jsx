@@ -9,11 +9,13 @@ import {
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
+import { useLogIn } from '../hooks';
 import { routes } from '../routes';
 import { beliveoIcon } from '../assets';
 
 const LogIn = () => {
   const classes = useStyle();
+  const [setInputEmail, setInputPassword, handleLogIn, error] = useLogIn();
   return (
     <>
       <Helmet>
@@ -35,17 +37,25 @@ const LogIn = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
+            {error !== '' ? (
+              <Typography variant="h3" className={classes.error} align="center">
+                {error}
+              </Typography>
+            ) : null}
             <TextField
               label="Email"
               fullWidth
               variant="outlined"
               className={classes.input}
+              onChange={(e) => setInputEmail(e.target.value)}
             />
             <TextField
               label="Password"
               fullWidth
               variant="outlined"
               className={classes.input}
+              onChange={(e) => setInputPassword(e.target.value)}
+              type="password"
             />
           </Grid>
           <Grid item xs={12}>
@@ -55,6 +65,7 @@ const LogIn = () => {
               fullWidth
               size="large"
               style={{ marginBottom: 10 }}
+              onClick={handleLogIn}
             >
               Log In
             </Button>
@@ -132,6 +143,11 @@ const useStyle = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: 80,
     },
+  },
+  error: {
+    fontSize: 16,
+    color: 'red',
+    marginBottom: 5,
   },
 }));
 
