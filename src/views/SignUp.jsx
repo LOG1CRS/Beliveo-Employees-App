@@ -129,7 +129,10 @@ const useStyle = makeStyles((theme) => ({
   },
   formContainer: {
     height: '100%',
-    padding: `20px 30px 20px 30px`,
+    padding: `20px 20px 20px 20px`,
+    [theme.breakpoints.up('sm')]: {
+      padding: `20px 30px 20px 30px`,
+    },
   },
   title: {
     paddingTop: 6,
