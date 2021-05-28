@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Typography, makeStyles, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import { routes } from '../routes';
 import { beliveoLogo } from '../assets';
@@ -9,51 +10,60 @@ const Welcome = () => {
   const classes = useStyle();
   const history = useHistory();
   return (
-    <Grid
-      container
-      className={classes.welcome}
-      justify="center"
-      alignContent="center"
-    >
-      <Grid container className={classes.welcomeContainer}>
-        <Grid item xs={12} className={classes.logoContainer}>
-          <img src={beliveoLogo} alt="logo" className={classes.logo} />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h1" align="center" className={classes.title}>
-            Welcome to Beliveo Dashboard!
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h2" align="center" className={classes.subTitle}>
-            Database client to manage employee information. (This project is a
-            technical exercise, for testing purposes only)
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button
-              variant="contained"
-              color="secondary"
-              size="large"
-              className={classes.signUpButton}
-              onClick={() => history.push(routes.signup)}
+    <>
+      <Helmet>
+        <title>Beliveo App</title>
+      </Helmet>
+      <Grid
+        container
+        className={classes.welcome}
+        justify="center"
+        alignContent="center"
+      >
+        <Grid container className={classes.welcomeContainer}>
+          <Grid item xs={12} className={classes.logoContainer}>
+            <img src={beliveoLogo} alt="logo" className={classes.logo} />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h1" align="center" className={classes.title}>
+              Welcome to Beliveo Dashboard!
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+              variant="h2"
+              align="center"
+              className={classes.subTitle}
             >
-              Sign Up
-            </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              size="large"
-              className={classes.loginButton}
-              onClick={() => history.push(routes.login)}
-            >
-              Log In
-            </Button>
-          </div>
+              Database client to manage employee information. (This project is a
+              technical exercise, for testing purposes only)
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                className={classes.signUpButton}
+                onClick={() => history.push(routes.signup)}
+              >
+                Sign Up
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                size="large"
+                className={classes.loginButton}
+                onClick={() => history.push(routes.login)}
+              >
+                Log In
+              </Button>
+            </div>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 
@@ -94,7 +104,6 @@ const useStyle = makeStyles((theme) => ({
     },
   },
   signUpButton: {
-    color: '#fff',
     width: 110,
     height: 45,
     marginRight: 15,

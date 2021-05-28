@@ -39,7 +39,12 @@ const theme = createMuiTheme({
     MuiButton: {
       outlined: {
         borderRadius: 7,
+      },
+      outlinedSecondary: {
         borderWidth: 3,
+        '&:hover': {
+          borderWidth: 3,
+        },
       },
       contained: {
         borderRadius: 7,
