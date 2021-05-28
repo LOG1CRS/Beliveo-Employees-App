@@ -23,11 +23,19 @@ const App = () => {
           <Route exact path={routes.welcome} component={Welcome} />
           <Route exact path={routes.login} component={LogIn} />
           <Route exact path={routes.signup} component={SignUp} />
-          <Layout>
-            <Route path={routes.dashboard} component={Dashboard} />
-            <Route path={routes.employees} component={Employees} />
-          </Layout>
           <Route component={NotFound} />
+          <Layout>
+            <ProtectedRoute
+              exact
+              path={routes.dashboard}
+              Component={Dashboard}
+            />
+            <ProtectedRoute
+              exact
+              path={routes.employees}
+              Component={Employees}
+            />
+          </Layout>
         </Switch>
       </ThemeProvider>
     </BrowserRouter>

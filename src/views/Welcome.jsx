@@ -3,6 +3,7 @@ import { Grid, Typography, makeStyles, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../routes';
+import { beliveoLogo } from '../assets';
 
 const Welcome = () => {
   const classes = useStyle();
@@ -15,6 +16,9 @@ const Welcome = () => {
       alignContent="center"
     >
       <Grid container className={classes.welcomeContainer}>
+        <Grid item xs={12} className={classes.logoContainer}>
+          <img src={beliveoLogo} alt="logo" className={classes.logo} />
+        </Grid>
         <Grid item xs={12}>
           <Typography variant="h1" align="center" className={classes.title}>
             Welcome to Beliveo Dashboard!
@@ -62,10 +66,10 @@ const useStyle = makeStyles((theme) => ({
   },
   welcomeContainer: {
     margin: 16,
-    minHeight: 350,
+    minHeight: 500,
     backgroundColor: 'white',
     borderRadius: 40,
-    padding: '30px 20px 0px 20px',
+    padding: '10px 20px 0px 20px',
     boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)',
     [theme.breakpoints.down('md')]: {
       width: '70%',
@@ -76,6 +80,17 @@ const useStyle = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       width: '50%',
       maxWidth: 800,
+    },
+  },
+  logoContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 150,
+    [theme.breakpoints.only('xl')]: {
+      width: 200,
     },
   },
   signUpButton: {
@@ -133,7 +148,7 @@ const useStyle = makeStyles((theme) => ({
       fontSize: 23,
     },
     [theme.breakpoints.only('xl')]: {
-      fontSize: 28,
+      fontSize: 25,
     },
     [theme.breakpoints.up('sm')]: {
       paddingLeft: 40,

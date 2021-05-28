@@ -44,6 +44,17 @@ const theme = createMuiTheme({
       contained: {
         borderRadius: 7,
       },
+      containedSecondary: {
+        color: '#fff',
+      },
+      sizeLarge: {
+        fontSize: 16,
+      },
+    },
+    MuiOutlinedInput: {
+      root: {
+        borderRadius: 7,
+      },
     },
   },
 });

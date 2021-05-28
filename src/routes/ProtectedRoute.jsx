@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { login } from './routes.json';
 
 const ProtectedRoute = (props) => {
-  const { path, component } = props;
+  const { path, Component } = props;
   const token = useSelector((store) => store.authToken);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const ProtectedRoute = (props) => {
       exact
       render={() => {
         if (token) {
-          return <component />;
+          return <Component />;
         } else {
           return <Redirect to={login} />;
         }
