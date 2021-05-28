@@ -1,18 +1,54 @@
 import React from 'react';
-import { Grid, Typography, makeStyles } from '@material-ui/core';
+import { Grid, Typography, makeStyles, Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+
+import { routes } from '../routes';
 
 const Welcome = () => {
   const classes = useStyle();
+  const history = useHistory();
   return (
     <Grid
       container
       className={classes.welcome}
       justify="center"
-      alignItems="center"
+      alignContent="center"
     >
-      <Typography variant="h1" align="center" style={{ fontSize: 50 }}>
-        Welcome to Beliveo!
-      </Typography>
+      <Grid container className={classes.welcomeContainer}>
+        <Grid item xs={12}>
+          <Typography variant="h1" align="center" className={classes.title}>
+            Welcome to Beliveo Dashboard!
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h2" align="center" className={classes.subTitle}>
+            Database client to manage employee information. (This project is a
+            technical exercise, for testing purposes only)
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              className={classes.signUpButton}
+              onClick={() => history.push(routes.signup)}
+            >
+              Sign Up
+            </Button>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="large"
+              className={classes.loginButton}
+              onClick={() => history.push(routes.login)}
+            >
+              Log In
+            </Button>
+          </div>
+        </Grid>
+      </Grid>
     </Grid>
   );
 };
@@ -23,6 +59,86 @@ const useStyle = makeStyles((theme) => ({
     height: '100vh',
     background:
       'linear-gradient(45deg, rgba(30,192,212,1) 25%, rgba(194,255,96,1) 100%)',
+  },
+  welcomeContainer: {
+    margin: 16,
+    minHeight: 350,
+    backgroundColor: 'white',
+    borderRadius: 40,
+    padding: '30px 20px 0px 20px',
+    boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)',
+    [theme.breakpoints.down('md')]: {
+      width: '70%',
+    },
+    [theme.breakpoints.only('xs')]: {
+      width: '100%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '50%',
+      maxWidth: 800,
+    },
+  },
+  signUpButton: {
+    color: '#fff',
+    width: 110,
+    height: 45,
+    marginRight: 15,
+    [theme.breakpoints.up('sm')]: {
+      marginRight: 30,
+      width: 120,
+      height: 50,
+      fontSize: 18,
+    },
+  },
+  loginButton: {
+    borderWidth: 3,
+    width: 110,
+    height: 45,
+    marginLeft: 15,
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: 30,
+      width: 120,
+      height: 50,
+      fontSize: 18,
+    },
+  },
+  title: {
+    marginTop: 8,
+    fontSize: 32,
+    [theme.breakpoints.only('sm')]: {
+      fontSize: 37,
+    },
+    [theme.breakpoints.only('md')]: {
+      fontSize: 42,
+    },
+    [theme.breakpoints.only('lg')]: {
+      fontSize: 39,
+    },
+    [theme.breakpoints.only('xl')]: {
+      fontSize: 45,
+    },
+    [theme.breakpoints.up('md')]: {
+      marginTop: 14,
+    },
+  },
+  subTitle: {
+    fontSize: 18,
+    [theme.breakpoints.only('sm')]: {
+      fontSize: 21,
+    },
+    [theme.breakpoints.only('md')]: {
+      fontSize: 26,
+    },
+    [theme.breakpoints.only('lg')]: {
+      fontSize: 23,
+    },
+    [theme.breakpoints.only('xl')]: {
+      fontSize: 28,
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: 40,
+      paddingRight: 40,
+    },
   },
 }));
 

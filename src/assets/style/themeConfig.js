@@ -6,7 +6,7 @@ const theme = createMuiTheme({
       main: '#1ec0d4',
     },
     secondary: {
-      main: '#c2ff60',
+      main: '#6add9e',
     },
     background: {
       default: '#efefef',
@@ -33,6 +33,17 @@ const theme = createMuiTheme({
       fontFamily: 'Roboto',
       fontWeight: 400,
       textTransform: 'none',
+    },
+  },
+  overrides: {
+    MuiButton: {
+      outlined: {
+        borderRadius: 7,
+        borderWidth: 3,
+      },
+      contained: {
+        borderRadius: 7,
+      },
     },
   },
 });
