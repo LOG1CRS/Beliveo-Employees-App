@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Typography, makeStyles, Button } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -9,6 +10,7 @@ import { beliveoLogo } from '../assets';
 const Welcome = () => {
   const classes = useStyle();
   const history = useHistory();
+  const authToken = useSelector((store) => store.authToken);
   return (
     <>
       <Helmet>
@@ -41,24 +43,38 @@ const Welcome = () => {
           </Grid>
           <Grid item xs={12}>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Button
-                variant="contained"
-                color="secondary"
-                size="large"
-                className={classes.signUpButton}
-                onClick={() => history.push(routes.signup)}
-              >
-                Sign Up
-              </Button>
-              <Button
-                variant="outlined"
-                color="secondary"
-                size="large"
-                className={classes.loginButton}
-                onClick={() => history.push(routes.login)}
-              >
-                Log In
-              </Button>
+              {authToken ? (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  className={classes.signUpButton}
+                  onClick={() => history.push(routes.dashboard)}
+                >
+                  Dashboard
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    size="large"
+                    className={classes.signUpButton}
+                    onClick={() => history.push(routes.signup)}
+                  >
+                    Sign Up
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    size="large"
+                    className={classes.loginButton}
+                    onClick={() => history.push(routes.login)}
+                  >
+                    Log In
+                  </Button>
+                </>
+              )}
             </div>
           </Grid>
         </Grid>

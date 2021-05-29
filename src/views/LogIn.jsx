@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Grid,
   Typography,
@@ -6,8 +6,9 @@ import {
   TextField,
   Button,
 } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useLogIn } from '../hooks';
 import { routes } from '../routes';
@@ -15,7 +16,16 @@ import { beliveoIcon } from '../assets';
 
 const LogIn = () => {
   const classes = useStyle();
+  const history = useHistory();
+  const authToken = useSelector((store) => store.authToken);
   const [setInputEmail, setInputPassword, handleLogIn, error] = useLogIn();
+
+  useEffect(() => {
+    if (authToken) {
+      history.push(routes.dashboard);
+    }
+  }, [authToken, history]);
+
   return (
     <>
       <Helmet>
