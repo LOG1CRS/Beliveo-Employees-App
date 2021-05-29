@@ -10,7 +10,7 @@ import {
 import { Menu } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
-import { beliveoIcon } from '../../assets';
+import { beliveoIcon, beliveoTitle } from '../../assets';
 import { routes } from '../../routes';
 
 const Navbar = (props) => {
@@ -28,9 +28,14 @@ const Navbar = (props) => {
       <Toolbar className={classes.toolBar}>
         <Hidden mdDown>
           <div className={classes.icon}>
-            <IconButton onClick={() => history.push(routes.dashboard)}>
+            <Button onClick={() => history.push(routes.dashboard)}>
               <img src={beliveoIcon} alt="logo" className={classes.logo} />
-            </IconButton>
+              <img
+                src={beliveoTitle}
+                alt="logo-title"
+                className={classes.logoTitle}
+              />
+            </Button>
           </div>
           <Button
             variant="contained"
@@ -82,6 +87,10 @@ const useStyle = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: 48,
     },
+  },
+  logoTitle: {
+    width: 100,
+    marginLeft: 13,
   },
   logOutButton: {
     color: '#fff',

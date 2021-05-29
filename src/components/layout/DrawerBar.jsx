@@ -117,7 +117,7 @@ const useStyle = makeStyles((theme) => ({
     height: '100%',
     paddingTop: 20,
     [theme.breakpoints.up('sm')]: {
-      paddingTop: 80,
+      paddingTop: 90,
     },
   },
   divider: {
