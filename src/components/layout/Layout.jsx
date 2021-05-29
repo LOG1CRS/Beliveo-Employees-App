@@ -57,8 +57,15 @@ const Layout = (props) => {
 
 const useStyle = makeStyles((theme) => ({
   content: {
+    paddingTop: 62,
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: 70,
+    },
     [theme.breakpoints.up('lg')]: {
       paddingLeft: themeValues.DRAWER_WIDTH,
+    },
+    [theme.breakpoints.only('xl')]: {
+      minWidth: 1600,
     },
   },
 }));

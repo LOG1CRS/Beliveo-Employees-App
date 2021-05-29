@@ -27,7 +27,6 @@ const useStyle = makeStyles((theme) => ({
   employees: {
     width: '100%',
     height: '100vh',
-    backgroundColor: 'white',
   },
 }));
 

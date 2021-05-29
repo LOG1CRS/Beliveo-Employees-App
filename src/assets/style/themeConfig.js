@@ -9,7 +9,7 @@ const theme = createMuiTheme({
       main: '#6add9e',
     },
     background: {
-      default: '#efefef',
+      default: '#e5ebf0',
     },
   },
   typography: {
