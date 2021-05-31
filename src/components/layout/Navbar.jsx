@@ -28,7 +28,7 @@ const Navbar = (props) => {
       <Toolbar className={classes.toolBar}>
         <Hidden mdDown>
           <div className={classes.icon}>
-            <Button onClick={() => history.push(routes.dashboard)}>
+            <Button onClick={() => history.push(routes.employees)}>
               <img src={beliveoIcon} alt="logo" className={classes.logo} />
               <img
                 src={beliveoTitle}
@@ -57,7 +57,7 @@ const Navbar = (props) => {
           </div>
           <div>
             <IconButton
-              onClick={() => history.push(routes.dashboard)}
+              onClick={() => history.push(routes.employees)}
               style={{ paddingRight: 5 }}
             >
               <img src={beliveoIcon} alt="logo" className={classes.logo} />

@@ -21,7 +21,7 @@ const useSignUp = () => {
       console.log('Authenticated');
       console.log(inputName, inputEmail, inputPassword);
       dispatch(addAuthToken('test'));
-      history.push(routes.dashboard);
+      history.push(routes.employees);
     }
   }, [formValidated, inputName, inputEmail, inputPassword, dispatch, history]);
 

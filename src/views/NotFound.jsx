@@ -13,7 +13,7 @@ const NotFound = () => {
 
   const handleReturnToHome = () => {
     if (authToken) {
-      history.push(routes.dashboard);
+      history.push(routes.employees);
     } else {
       history.push(routes.welcome);
     }

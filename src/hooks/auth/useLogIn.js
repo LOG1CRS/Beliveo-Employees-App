@@ -20,7 +20,7 @@ const useLogIn = () => {
       console.log('Authenticated');
       console.log(inputEmail, inputPassword);
       dispatch(addAuthToken('test'));
-      history.push(routes.dashboard);
+      history.push(routes.employees);
     }
   }, [formValidated, inputEmail, inputPassword, dispatch, history]);
 

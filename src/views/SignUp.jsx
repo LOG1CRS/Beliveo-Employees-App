@@ -24,7 +24,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (authToken) {
-      history.push(routes.dashboard);
+      history.push(routes.employees);
     }
   }, [authToken, history]);
 

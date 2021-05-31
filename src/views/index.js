@@ -1,8 +1,8 @@
 import Welcome from './Welcome';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
-import Dashboard from './Dashboard';
+import Reminders from './Reminders';
 import Employees from './Employees';
 import NotFound from './NotFound';
 
-export { Welcome, LogIn, SignUp, Dashboard, Employees, NotFound };
+export { Welcome, LogIn, SignUp, Reminders, Employees, NotFound };

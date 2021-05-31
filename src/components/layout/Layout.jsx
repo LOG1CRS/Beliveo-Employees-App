@@ -22,8 +22,8 @@ const Layout = (props) => {
 
   useEffect(() => {
     if (
-      location.pathname === routes.dashboard ||
-      location.pathname === routes.employees
+      location.pathname === routes.employees ||
+      location.pathname === routes.reminders
     ) {
       setLayoutActive(true);
     } else {

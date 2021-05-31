@@ -49,7 +49,7 @@ const Welcome = () => {
                   color="secondary"
                   size="large"
                   className={classes.signUpButton}
-                  onClick={() => history.push(routes.dashboard)}
+                  onClick={() => history.push(routes.employees)}
                 >
                   Dashboard
                 </Button>

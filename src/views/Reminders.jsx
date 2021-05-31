@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { ReminderCard } from '../components';
 import { reminders } from '../utils';
 
-const Dashboard = () => {
+const Reminders = () => {
   const classes = useStyle();
 
   return (
@@ -71,4 +71,4 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default Dashboard;
+export default Reminders;

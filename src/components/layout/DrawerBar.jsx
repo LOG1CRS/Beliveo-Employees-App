@@ -11,7 +11,7 @@ import {
   Grid,
   Button,
 } from '@material-ui/core';
-import { People, Dashboard } from '@material-ui/icons';
+import { People, Assignment } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
 import { routes } from '../../routes';
@@ -29,18 +29,18 @@ const DrawerContent = (props) => {
 
   return (
     <List style={{ padding: 0 }}>
-      <ListItem button onClick={() => handleChangeRoute(routes.dashboard)}>
-        <ListItemIcon>
-          <Dashboard />
-        </ListItemIcon>
-        <ListItemText primary="Dashboard" />
-      </ListItem>
-      <Divider className={classes.divider} />
       <ListItem button onClick={() => handleChangeRoute(routes.employees)}>
         <ListItemIcon>
           <People />
         </ListItemIcon>
         <ListItemText primary="Employees" />
+      </ListItem>
+      <Divider className={classes.divider} />
+      <ListItem button onClick={() => handleChangeRoute(routes.reminders)}>
+        <ListItemIcon>
+          <Assignment />
+        </ListItemIcon>
+        <ListItemText primary="Reminders" />
       </ListItem>
     </List>
   );
