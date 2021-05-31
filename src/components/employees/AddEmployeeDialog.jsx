@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -13,6 +13,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Typography,
 } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -20,25 +21,30 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+import { useAddEmployee } from '../../hooks';
+
 const AddEmployeeDialog = (props) => {
   const { addEmployee, setAddEmployee } = props;
   const classes = useStyle();
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
-
-  const [select, setSelect] = useState('');
-
-  const handleSelection = (event) => {
-    setSelect(event.target.value);
-  };
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
-  const handleAddEmployee = () => {
-    setAddEmployee(false);
-  };
+  const [
+    name,
+    setName,
+    lastName,
+    setLastName,
+    email,
+    setEmail,
+    nationality,
+    setNationality,
+    phone,
+    setPhone,
+    civilStatus,
+    selectedDate,
+    handleCivilStatus,
+    handleDateChange,
+    handleAddEmployee,
+    error,
+  ] = useAddEmployee(setAddEmployee);
 
   return (
     <Dialog
@@ -52,12 +58,20 @@ const AddEmployeeDialog = (props) => {
       </DialogTitle>
       <DialogContent>
         <Grid container>
+          <Grid item xs={12}>
+            {error !== '' ? (
+              <Typography variant="h3" className={classes.error} align="center">
+                {error}
+              </Typography>
+            ) : null}
+          </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
             <TextField
               label="Name"
               fullWidth
               variant="outlined"
-              onChange={(e) => console.log(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
@@ -65,7 +79,8 @@ const AddEmployeeDialog = (props) => {
               label="Last Name"
               fullWidth
               variant="outlined"
-              onChange={(e) => console.log(e.target.value)}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
@@ -73,7 +88,8 @@ const AddEmployeeDialog = (props) => {
               label="Email"
               fullWidth
               variant="outlined"
-              onChange={(e) => console.log(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
@@ -81,7 +97,8 @@ const AddEmployeeDialog = (props) => {
               label="Nationality"
               fullWidth
               variant="outlined"
-              onChange={(e) => console.log(e.target.value)}
+              value={nationality}
+              onChange={(e) => setNationality(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
@@ -89,7 +106,8 @@ const AddEmployeeDialog = (props) => {
               label="Phone"
               fullWidth
               variant="outlined"
-              onChange={(e) => console.log(e.target.value)}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               type="number"
             />
           </Grid>
@@ -101,8 +119,8 @@ const AddEmployeeDialog = (props) => {
             >
               <InputLabel>Civil Status</InputLabel>
               <Select
-                value={select}
-                onChange={handleSelection}
+                value={civilStatus}
+                onChange={handleCivilStatus}
                 label="Civil Status"
               >
                 <MenuItem value="Single">Single</MenuItem>
@@ -203,6 +221,11 @@ const useStyle = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: 30,
     },
+  },
+  error: {
+    fontSize: 16,
+    color: 'red',
+    marginBottom: 5,
   },
 }));
 

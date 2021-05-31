@@ -1,7 +1,9 @@
 import React from 'react';
 import { Paper, makeStyles } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
+import { useDispatch } from 'react-redux';
 
+import { addEmployeeSelected } from '../../redux';
 import { users } from '../../utils';
 
 const columns = [
@@ -21,8 +23,9 @@ const columns = [
 ];
 
 const EmployeesList = (props) => {
-  const { setEmployeeDialog, setEmployeeSelected } = props;
+  const { setEmployeeDialog } = props;
   const classes = useStyle();
+  const dispatch = useDispatch();
   return (
     <Paper elevation={4} className={classes.employeesList}>
       <DataGrid
@@ -36,7 +39,7 @@ const EmployeesList = (props) => {
         hideFooterSelectedRowCount
         onRowSelected={(rowSelected) => {
           setEmployeeDialog(true);
-          setEmployeeSelected(rowSelected.data);
+          dispatch(addEmployeeSelected(rowSelected.data));
         }}
       />
     </Paper>

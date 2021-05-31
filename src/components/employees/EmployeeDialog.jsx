@@ -10,11 +10,30 @@ import {
   Grid,
   TextField,
   Avatar,
+  Typography,
 } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+
+import { useEditEmployee } from '../../hooks';
 
 const EmployeeDialog = (props) => {
-  const { employeeDialog, setEmployeeDialog, employeeSelected } = props;
+  const { employeeDialog, setEmployeeDialog } = props;
   const classes = useStyle();
+  const employeeSelected = useSelector((store) => store.employeeSelected);
+
+  const [
+    name,
+    setName,
+    lastName,
+    setLastName,
+    email,
+    setEmail,
+    phone,
+    setPhone,
+    handleEditEmployee,
+    error,
+    activeSave,
+  ] = useEditEmployee(setEmployeeDialog);
 
   return (
     <Dialog
@@ -33,13 +52,20 @@ const EmployeeDialog = (props) => {
       </DialogTitle>
       <DialogContent>
         <Grid container>
+          <Grid item xs={12}>
+            {error !== '' ? (
+              <Typography variant="h3" className={classes.error} align="center">
+                {error}
+              </Typography>
+            ) : null}
+          </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
             <TextField
               label="Name"
               fullWidth
               variant="outlined"
-              onChange={(e) => console.log(e.target.value)}
-              defaultValue={employeeSelected?.name}
+              onChange={(e) => setName(e.target.value)}
+              value={name}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
@@ -47,8 +73,8 @@ const EmployeeDialog = (props) => {
               label="Last Name"
               fullWidth
               variant="outlined"
-              onChange={(e) => console.log(e.target.value)}
-              defaultValue={employeeSelected?.lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
@@ -56,8 +82,8 @@ const EmployeeDialog = (props) => {
               label="Email"
               fullWidth
               variant="outlined"
-              onChange={(e) => console.log(e.target.value)}
-              defaultValue={employeeSelected?.email}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
@@ -65,9 +91,9 @@ const EmployeeDialog = (props) => {
               label="Phone"
               fullWidth
               variant="outlined"
-              onChange={(e) => console.log(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
               type="number"
-              defaultValue={employeeSelected?.phone}
+              value={phone}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={classes.inputContainer}>
@@ -123,8 +149,9 @@ const EmployeeDialog = (props) => {
             variant="contained"
             color="secondary"
             size="large"
-            onClick={() => setEmployeeDialog(false)}
+            onClick={handleEditEmployee}
             className={classes.button}
+            disabled={activeSave ? false : true}
           >
             Save
           </Button>
@@ -148,9 +175,10 @@ const EmployeeDialog = (props) => {
                 variant="contained"
                 color="secondary"
                 size="large"
-                onClick={() => setEmployeeDialog(false)}
+                onClick={handleEditEmployee}
                 className={classes.button}
                 fullWidth
+                disabled={activeSave ? false : true}
               >
                 Save
               </Button>
@@ -190,6 +218,11 @@ const useStyle = makeStyles((theme) => ({
     height: 90,
     fontSize: 32,
     marginTop: 30,
+  },
+  error: {
+    fontSize: 16,
+    color: 'red',
+    marginBottom: 5,
   },
 }));
 

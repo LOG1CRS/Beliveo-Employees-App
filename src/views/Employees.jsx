@@ -20,7 +20,6 @@ const Employees = () => {
   const classes = useStyle();
   const [addEmployee, setAddEmployee] = useState(false);
   const [employeeDialog, setEmployeeDialog] = useState(false);
-  const [employeeSelected, setEmployeeSelected] = useState(null);
 
   return (
     <>
@@ -51,10 +50,7 @@ const Employees = () => {
           <SearchBar />
         </Grid> */}
         <Grid item xs={12} className={classes.employeesContainer}>
-          <EmployeesList
-            setEmployeeDialog={setEmployeeDialog}
-            setEmployeeSelected={setEmployeeSelected}
-          />
+          <EmployeesList setEmployeeDialog={setEmployeeDialog} />
         </Grid>
         {/* <Grid item xs={12} className={classes.buttonsContainer}>
           <Hidden only="xs">
@@ -110,7 +106,6 @@ const Employees = () => {
       <EmployeeDialog
         employeeDialog={employeeDialog}
         setEmployeeDialog={setEmployeeDialog}
-        employeeSelected={employeeSelected}
       />
     </>
   );
