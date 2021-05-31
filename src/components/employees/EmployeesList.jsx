@@ -1,10 +1,9 @@
 import React from 'react';
 import { Paper, makeStyles } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { addEmployeeSelected } from '../../redux';
-import { users } from '../../utils';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -26,10 +25,11 @@ const EmployeesList = (props) => {
   const { setEmployeeDialog } = props;
   const classes = useStyle();
   const dispatch = useDispatch();
+  const employeesList = useSelector((store) => store.employeesList);
   return (
     <Paper elevation={4} className={classes.employeesList}>
       <DataGrid
-        rows={users}
+        rows={employeesList}
         columns={columns.map((column) => ({
           ...column,
           sortable: false,

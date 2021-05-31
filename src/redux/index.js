@@ -4,6 +4,12 @@ import {
   addEmployeeSelected,
   removeEmployeeSelected,
 } from './actions/employeeSelectedActions';
+import {
+  updateEmployeesList,
+  addNewEmployee,
+  updateEmployee,
+  removeEmployee,
+} from './actions/employeesListActions';
 
 export {
   store,
@@ -12,4 +18,8 @@ export {
   removeAuthToken,
   addEmployeeSelected,
   removeEmployeeSelected,
+  updateEmployeesList,
+  addNewEmployee,
+  updateEmployee,
+  removeEmployee,
 };

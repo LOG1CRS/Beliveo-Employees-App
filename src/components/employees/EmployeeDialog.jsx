@@ -31,6 +31,7 @@ const EmployeeDialog = (props) => {
     phone,
     setPhone,
     handleEditEmployee,
+    handleDeleteEmployee,
     error,
     activeSave,
   ] = useEditEmployee(setEmployeeDialog);
@@ -134,8 +135,18 @@ const EmployeeDialog = (props) => {
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogActions>
+      <DialogActions className={classes.actionContainer}>
         <Hidden only="xs">
+          <div style={{ flexGrow: 1 }}>
+            <Button
+              variant="contained"
+              size="large"
+              className={classes.deleteButton}
+              onClick={handleDeleteEmployee}
+            >
+              Delete
+            </Button>
+          </div>
           <Button
             variant="outlined"
             color="secondary"
@@ -173,6 +184,17 @@ const EmployeeDialog = (props) => {
             <Grid item xs={12}>
               <Button
                 variant="contained"
+                size="large"
+                className={classes.deleteButton}
+                onClick={handleDeleteEmployee}
+                fullWidth
+              >
+                Delete
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                variant="contained"
                 color="secondary"
                 size="large"
                 onClick={handleEditEmployee}
@@ -191,15 +213,6 @@ const EmployeeDialog = (props) => {
 };
 
 const useStyle = makeStyles((theme) => ({
-  button: {
-    [theme.breakpoints.only('xs')]: {
-      marginTop: 7,
-      marginBottom: 7,
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: 80,
-    },
-  },
   inputContainer: {
     paddingTop: 6,
     paddingBottom: 6,
@@ -223,6 +236,40 @@ const useStyle = makeStyles((theme) => ({
     fontSize: 16,
     color: 'red',
     marginBottom: 5,
+  },
+  actionContainer: {
+    paddingLeft: 24,
+    paddingRight: 24,
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: 32,
+      paddingRight: 32,
+    },
+  },
+  button: {
+    [theme.breakpoints.only('xs')]: {
+      marginTop: 7,
+      marginBottom: 7,
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: 80,
+    },
+  },
+  deleteButton: {
+    color: '#fff',
+    backgroundColor: 'red',
+    '&:hover': {
+      backgroundColor: 'red',
+      '@media (hover: none)': {
+        backgroundColor: 'red',
+      },
+    },
+    [theme.breakpoints.only('xs')]: {
+      marginTop: 7,
+      marginBottom: 7,
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: 80,
+    },
   },
 }));
 

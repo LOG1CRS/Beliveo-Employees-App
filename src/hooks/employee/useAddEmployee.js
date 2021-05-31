@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import validator from 'validator';
 
+import { addNewEmployee } from '../../redux';
+
 const useAddEmployee = (setAddEmployee) => {
+  const dispatch = useDispatch();
+  const employeesList = useSelector((store) => store.employeesList);
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -16,9 +21,9 @@ const useAddEmployee = (setAddEmployee) => {
   useEffect(() => {
     if (formValidated) {
       setAddEmployee(false);
-      console.log(employeeInfo);
+      dispatch(addNewEmployee(employeeInfo));
     }
-  }, [formValidated, setAddEmployee, employeeInfo]);
+  }, [formValidated, setAddEmployee, employeeInfo, dispatch]);
 
   const getFormattedDate = (date) => {
     var year = date.getFullYear();
@@ -77,8 +82,10 @@ const useAddEmployee = (setAddEmployee) => {
       return;
     }
     const birthday = getFormattedDate(selectedDate);
+    const id = employeesList[employeesList.length - 1].id;
     setFormValidated(true);
     setEmployeeInfo({
+      id: id + 1,
       name,
       lastName,
       email,

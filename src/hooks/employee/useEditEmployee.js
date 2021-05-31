@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import validator from 'validator';
+
+import { updateEmployee, removeEmployee } from '../../redux';
 
 const useEditEmployee = (setEmployeeDialog) => {
   const employeeSelected = useSelector((store) => store.employeeSelected);
+  const dispatch = useDispatch();
 
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -12,7 +15,7 @@ const useEditEmployee = (setEmployeeDialog) => {
   const [formValidated, setFormValidated] = useState(false);
   const [error, setError] = useState('');
   const [activeSave, setActiveSave] = useState(false);
-  const [employeeInfo, setEmployeeInfo] = useState({});
+  const [editedEmployeeInfo, setEditedEmployeeInfo] = useState({});
 
   useEffect(() => {
     setName(employeeSelected?.name);
@@ -37,9 +40,9 @@ const useEditEmployee = (setEmployeeDialog) => {
   useEffect(() => {
     if (formValidated) {
       setEmployeeDialog(false);
-      console.log(employeeInfo);
+      dispatch(updateEmployee(editedEmployeeInfo.id, editedEmployeeInfo));
     }
-  }, [formValidated, setEmployeeDialog, employeeInfo]);
+  }, [formValidated, setEmployeeDialog, editedEmployeeInfo, dispatch]);
 
   const handleEditEmployee = () => {
     if (name.trim().length < 4) {
@@ -67,16 +70,26 @@ const useEditEmployee = (setEmployeeDialog) => {
     }
 
     setFormValidated(true);
-    setEmployeeInfo({
+    setEditedEmployeeInfo({
+      id: employeeSelected.id,
       name,
       lastName,
       email,
-      nationality: employeeSelected.nationality,
       phone,
-      civilStatus: employeeSelected.civilStatus,
-      birthday: employeeSelected.birthday,
     });
     setError('');
+  };
+
+  const handleDeleteEmployee = () => {
+    const deleting = window.confirm(
+      `Are you sure to delete ${employeeSelected.name} employee?`
+    );
+    if (!deleting) {
+      return;
+    }
+
+    dispatch(removeEmployee(employeeSelected.id));
+    setEmployeeDialog(false);
   };
 
   return [
@@ -89,6 +102,7 @@ const useEditEmployee = (setEmployeeDialog) => {
     phone,
     setPhone,
     handleEditEmployee,
+    handleDeleteEmployee,
     error,
     activeSave,
   ];
