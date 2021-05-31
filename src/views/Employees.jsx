@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   makeStyles,
@@ -12,10 +12,12 @@ import {
   // SearchBar,
   EmployeesList,
   HelpPopover,
+  AddEmployeeDialog,
 } from '../components';
 
 const Employees = () => {
   const classes = useStyle();
+  const [addEmployee, setAddEmployee] = useState(false);
 
   return (
     <>
@@ -36,6 +38,7 @@ const Employees = () => {
               color="secondary"
               size="large"
               className={classes.addEmployeeButton}
+              onClick={() => setAddEmployee(true)}
             >
               Add employee
             </Button>
@@ -94,6 +97,10 @@ const Employees = () => {
           </Hidden>
         </Grid> */}
       </Grid>
+      <AddEmployeeDialog
+        addEmployee={addEmployee}
+        setAddEmployee={setAddEmployee}
+      />
     </>
   );
 };

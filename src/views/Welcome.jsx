@@ -48,7 +48,7 @@ const Welcome = () => {
                   variant="contained"
                   color="secondary"
                   size="large"
-                  className={classes.signUpButton}
+                  className={classes.dashboardButton}
                   onClick={() => history.push(routes.employees)}
                 >
                   Dashboard
@@ -125,6 +125,15 @@ const useStyle = makeStyles((theme) => ({
     marginRight: 15,
     [theme.breakpoints.up('sm')]: {
       marginRight: 30,
+      width: 120,
+      height: 50,
+      fontSize: 18,
+    },
+  },
+  dashboardButton: {
+    width: 110,
+    height: 45,
+    [theme.breakpoints.up('sm')]: {
       width: 120,
       height: 50,
       fontSize: 18,

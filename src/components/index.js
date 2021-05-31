@@ -3,5 +3,13 @@ import ReminderCard from './reminders/ReminderCard';
 import SearchBar from './employees/SearchBar';
 import EmployeesList from './employees/EmployeesList';
 import HelpPopover from './employees/HelpPopover';
+import AddEmployeeDialog from './employees/AddEmployeeDialog';
 
-export { Layout, ReminderCard, SearchBar, EmployeesList, HelpPopover };
+export {
+  Layout,
+  ReminderCard,
+  SearchBar,
+  EmployeesList,
+  HelpPopover,
+  AddEmployeeDialog,
+};
