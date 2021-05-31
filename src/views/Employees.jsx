@@ -13,11 +13,14 @@ import {
   EmployeesList,
   HelpPopover,
   AddEmployeeDialog,
+  EmployeeDialog,
 } from '../components';
 
 const Employees = () => {
   const classes = useStyle();
   const [addEmployee, setAddEmployee] = useState(false);
+  const [employeeDialog, setEmployeeDialog] = useState(false);
+  const [employeeSelected, setEmployeeSelected] = useState(null);
 
   return (
     <>
@@ -48,7 +51,10 @@ const Employees = () => {
           <SearchBar />
         </Grid> */}
         <Grid item xs={12} className={classes.employeesContainer}>
-          <EmployeesList />
+          <EmployeesList
+            setEmployeeDialog={setEmployeeDialog}
+            setEmployeeSelected={setEmployeeSelected}
+          />
         </Grid>
         {/* <Grid item xs={12} className={classes.buttonsContainer}>
           <Hidden only="xs">
@@ -100,6 +106,11 @@ const Employees = () => {
       <AddEmployeeDialog
         addEmployee={addEmployee}
         setAddEmployee={setAddEmployee}
+      />
+      <EmployeeDialog
+        employeeDialog={employeeDialog}
+        setEmployeeDialog={setEmployeeDialog}
+        employeeSelected={employeeSelected}
       />
     </>
   );

@@ -6,20 +6,22 @@ import { users } from '../../utils';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
-  { field: 'name', headerName: 'Name', width: 180 },
-  { field: 'lastName', headerName: 'Last name', width: 180 },
-  { field: 'email', headerName: 'Email', width: 180 },
+  { field: 'name', headerName: 'Name', width: 170 },
+  { field: 'lastName', headerName: 'Last name', width: 170 },
+  { field: 'email', headerName: 'Email', width: 170 },
+  { field: 'nationality', headerName: 'Nationality', width: 170 },
   {
     field: 'phone',
     headerName: 'Phone',
     type: 'number',
-    width: 180,
+    width: 170,
   },
-  { field: 'civilStatus', headerName: 'Civil Status', width: 180 },
-  { field: 'birthday', headerName: 'Birthday', width: 180 },
+  { field: 'civilStatus', headerName: 'Civil Status', width: 170 },
+  { field: 'birthday', headerName: 'Birthday', width: 170 },
 ];
 
-const EmployeesList = () => {
+const EmployeesList = (props) => {
+  const { setEmployeeDialog, setEmployeeSelected } = props;
   const classes = useStyle();
   return (
     <Paper elevation={4} className={classes.employeesList}>
@@ -33,7 +35,8 @@ const EmployeesList = () => {
         autoPageSize
         hideFooterSelectedRowCount
         onRowSelected={(rowSelected) => {
-          console.log(rowSelected.data);
+          setEmployeeDialog(true);
+          setEmployeeSelected(rowSelected.data);
         }}
       />
     </Paper>

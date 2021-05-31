@@ -4,6 +4,7 @@ import SearchBar from './employees/SearchBar';
 import EmployeesList from './employees/EmployeesList';
 import HelpPopover from './employees/HelpPopover';
 import AddEmployeeDialog from './employees/AddEmployeeDialog';
+import EmployeeDialog from './employees/EmployeeDialog';
 
 export {
   Layout,
@@ -12,4 +13,5 @@ export {
   EmployeesList,
   HelpPopover,
   AddEmployeeDialog,
+  EmployeeDialog,
 };
