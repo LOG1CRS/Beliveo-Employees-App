@@ -18,7 +18,8 @@ const LogIn = () => {
   const classes = useStyle();
   const history = useHistory();
   const authToken = useSelector((store) => store.authToken);
-  const [setInputEmail, setInputPassword, handleLogIn, error] = useLogIn();
+  const [setInputEmail, setInputPassword, handleLogIn, clientError] =
+    useLogIn();
 
   useEffect(() => {
     if (authToken) {
@@ -47,9 +48,13 @@ const LogIn = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            {error !== '' ? (
-              <Typography variant="h3" className={classes.error} align="center">
-                {error}
+            {clientError !== '' ? (
+              <Typography
+                variant="h3"
+                className={classes.clientError}
+                align="center"
+              >
+                {clientError}
               </Typography>
             ) : null}
             <TextField
@@ -154,7 +159,7 @@ const useStyle = makeStyles((theme) => ({
       width: 80,
     },
   },
-  error: {
+  clientError: {
     fontSize: 16,
     color: 'red',
     marginBottom: 5,

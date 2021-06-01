@@ -19,8 +19,13 @@ const SignUp = () => {
   const classes = useStyle();
   const history = useHistory();
   const authToken = useSelector((store) => store.authToken);
-  const [setInputName, setInputEmail, setInputPassword, handleSignUp, error] =
-    useSignUp();
+  const [
+    setInputName,
+    setInputEmail,
+    setInputPassword,
+    handleSignUp,
+    clientError,
+  ] = useSignUp();
 
   useEffect(() => {
     if (authToken) {
@@ -52,13 +57,13 @@ const SignUp = () => {
                 </Typography>
               </Grid>
               <Grid item xs={12}>
-                {error !== '' ? (
+                {clientError !== '' ? (
                   <Typography
                     variant="h3"
-                    className={classes.error}
+                    className={classes.clientError}
                     align="center"
                   >
-                    {error}
+                    {clientError}
                   </Typography>
                 ) : null}
                 <TextField
@@ -184,7 +189,7 @@ const useStyle = makeStyles((theme) => ({
       marginBottom: 8,
     },
   },
-  error: {
+  clientError: {
     fontSize: 16,
     color: 'red',
     marginBottom: 5,
