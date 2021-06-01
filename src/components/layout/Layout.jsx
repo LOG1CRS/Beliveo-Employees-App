@@ -5,7 +5,8 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import Drawer from './DrawerBar';
-import { removeAuthToken } from '../../redux';
+import LoadingBackdrop from './LoadingBackdrop';
+import { removeAuthToken, removeUser } from '../../redux';
 import { themeValues } from '../../assets';
 import { routes } from '../../routes';
 
@@ -34,6 +35,7 @@ const Layout = (props) => {
   const handleLogOut = () => {
     dispatch(removeAuthToken());
     history.push(routes.welcome);
+    dispatch(removeUser());
   };
 
   return (
@@ -51,6 +53,7 @@ const Layout = (props) => {
       ) : (
         <> {children} </>
       )}
+      <LoadingBackdrop />
     </>
   );
 };

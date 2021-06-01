@@ -6,8 +6,10 @@ import {
   makeStyles,
   Hidden,
   IconButton,
+  Typography,
 } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { beliveoIcon, beliveoTitle } from '../../assets';
@@ -17,6 +19,16 @@ const Navbar = (props) => {
   const { setOpenDrawer, handleLogOut } = props;
   const classes = useStyle();
   const history = useHistory();
+  const user = useSelector((store) => store.user);
+
+  const getUserName = () => {
+    if (!user.name) {
+      const name = user.email.split('@');
+      return name[0];
+    } else {
+      return user.name;
+    }
+  };
 
   return (
     <AppBar
@@ -37,6 +49,11 @@ const Navbar = (props) => {
               />
             </Button>
           </div>
+          {user ? (
+            <Typography className={classes.userName}>
+              {`Good day:  ${getUserName()}`}
+            </Typography>
+          ) : null}
           <Button
             variant="contained"
             size="large"
@@ -55,6 +72,14 @@ const Navbar = (props) => {
               <Menu style={{ color: '#fff', fontSize: 30 }} />
             </IconButton>
           </div>
+          {user ? (
+            <div>
+              <Typography className={classes.userName}>
+                {getUserName()}
+              </Typography>
+            </div>
+          ) : null}
+
           <div>
             <IconButton
               onClick={() => history.push(routes.employees)}
@@ -100,6 +125,14 @@ const useStyle = makeStyles((theme) => ({
       '@media (hover: none)': {
         backgroundColor: 'red',
       },
+    },
+  },
+  userName: {
+    paddingRight: 10,
+    fontSize: 20,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 25,
+      paddingRight: 30,
     },
   },
 }));

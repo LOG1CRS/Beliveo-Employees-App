@@ -19,10 +19,36 @@ This repo is React challenge code for Beliveo.
 
     git clone https://github.com/LOG1CRS/Beliveo-Employees-App.git
 
-**Installing dependencies:**
+**Installing client dependencies:**
 
     npm install
 
-**Running the app:**
+**Installing server dependencies:**
 
-    npm start
+    cd server && npm install
+
+**Add a .env file in the server folder with your own values**
+
+    Port = <>
+    MONGO_DB_URI = <>
+    SECRET_KEY = <>
+
+**Finally, run the app with one of the following scripts available:**
+
+## Available Scripts
+
+### `npm start`
+
+Runs the client in the development mode.
+
+### `npm run server`
+
+Runs the server in the development mode.
+
+### `npm run project-dev`
+
+Runs both the client and the server concurrently.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.

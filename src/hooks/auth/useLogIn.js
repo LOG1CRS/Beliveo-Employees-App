@@ -5,7 +5,12 @@ import { useMutation } from '@apollo/client';
 import validator from 'validator';
 
 import { routes } from '../../routes';
-import { addAuthToken } from '../../redux';
+import {
+  addAuthToken,
+  addUser,
+  // setLoadingOn,
+  // setLoadingOff
+} from '../../redux';
 import { methods } from '../../utils';
 
 const useLogIn = () => {
@@ -46,6 +51,8 @@ const useLogIn = () => {
       //     password: inputPassword,
       //   },
       // });
+
+      dispatch(addUser({ email: inputEmail }));
       dispatch(addAuthToken('test'));
       history.push(routes.employees);
     }
