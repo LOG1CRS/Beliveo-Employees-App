@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const graphClient = new ApolloClient({
-  uri: 'https://beliveo-server.herokuapp.com/',
+  uri: 'https://beliveo-app.herokuapp.com/',
   cache: new InMemoryCache(),
 });
 

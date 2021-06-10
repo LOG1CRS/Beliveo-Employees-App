@@ -8,8 +8,8 @@ import { routes } from '../../routes';
 import {
   addAuthToken,
   addUser,
-  // setLoadingOn,
-  // setLoadingOff
+  setLoadingOn,
+  setLoadingOff,
 } from '../../redux';
 import { methods } from '../../utils';
 
@@ -27,49 +27,36 @@ const useSignUp = () => {
 
   useEffect(() => {
     if (loading) {
-      // dispatch(loadingActions.setLoadingOn());
+      dispatch(setLoadingOn());
     } else {
-      // dispatch(loadingActions.setLoadingOff());
+      dispatch(setLoadingOff());
     }
 
     if (error) {
-      console.error(error);
       setClientError(error.message);
     }
 
     if (data && !error) {
-      console.log(data);
-      dispatch(addAuthToken(data.token));
+      dispatch(addAuthToken(data.register.token));
+      const user = { name: data.register.username, email: data.register.email };
+      dispatch(addUser(user));
       history.push(routes.employees);
     }
   }, [data, error, loading, setClientError, dispatch, history]);
 
   useEffect(() => {
     if (formValidated) {
-      // setSignUp({
-      //   variables: {
-      //     RegisterInput: {
-      //       username: inputName,
-      //       email: inputEmail,
-      //       password: inputPassword,
-      //     },
-      //   },
-      // });
-
-      const user = { name: inputName, email: inputEmail };
-      dispatch(addUser(user));
-      dispatch(addAuthToken('test'));
-      history.push(routes.employees);
+      setSignUp({
+        variables: {
+          input: {
+            username: inputName,
+            email: inputEmail,
+            password: inputPassword,
+          },
+        },
+      });
     }
-  }, [
-    formValidated,
-    inputName,
-    inputEmail,
-    inputPassword,
-    setSignUp,
-    dispatch,
-    history,
-  ]);
+  }, [formValidated, inputName, inputEmail, inputPassword, setSignUp]);
 
   const handleSignUp = () => {
     if (inputName.trim().length < 4) {

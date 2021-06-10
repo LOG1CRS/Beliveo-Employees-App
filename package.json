@@ -29,7 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "server": "cd server && npm run dev",
+    "server": "cd gql_server && npm run dev",
     "project-dev": "concurrently \"npm start\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test",

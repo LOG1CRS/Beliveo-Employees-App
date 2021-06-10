@@ -8,8 +8,8 @@ import { routes } from '../../routes';
 import {
   addAuthToken,
   addUser,
-  // setLoadingOn,
-  // setLoadingOff
+  setLoadingOn,
+  setLoadingOff,
 } from '../../redux';
 import { methods } from '../../utils';
 
@@ -26,9 +26,9 @@ const useLogIn = () => {
 
   useEffect(() => {
     if (loading) {
-      // dispatch(loadingActions.setLoadingOn());
+      dispatch(setLoadingOn());
     } else {
-      // dispatch(loadingActions.setLoadingOff());
+      dispatch(setLoadingOff());
     }
 
     if (error) {
@@ -37,26 +37,23 @@ const useLogIn = () => {
     }
 
     if (data && !error) {
-      console.log(data);
-      dispatch(addAuthToken(data.token));
+      dispatch(addAuthToken(data.login.token));
+      const user = { name: data.login.username, email: data.login.email };
+      dispatch(addUser(user));
       history.push(routes.employees);
     }
   }, [data, error, loading, setClientError, dispatch, history]);
 
   useEffect(() => {
     if (formValidated) {
-      // setLogIn({
-      //   variables: {
-      //     email: inputEmail,
-      //     password: inputPassword,
-      //   },
-      // });
-
-      dispatch(addUser({ email: inputEmail }));
-      dispatch(addAuthToken('test'));
-      history.push(routes.employees);
+      setLogIn({
+        variables: {
+          email: inputEmail,
+          password: inputPassword,
+        },
+      });
     }
-  }, [formValidated, inputEmail, inputPassword, setLogIn, dispatch, history]);
+  }, [formValidated, inputEmail, inputPassword, setLogIn]);
 
   const handleLogIn = () => {
     if (!validator.isEmail(inputEmail.trim())) {
