@@ -4,9 +4,8 @@ import {
   UPDATE_EMPLOYEE,
   REMOVE_EMPLOYEE,
 } from '../actions/employeesListActions';
-import { users } from '../../utils';
 
-const employeesListReducer = (state = users, action) => {
+const employeesListReducer = (state = [], action) => {
   switch (action.type) {
     case UPDATE_EMPLOYEES_LIST:
       return action.payload;

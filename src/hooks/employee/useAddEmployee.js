@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useMutation } from '@apollo/client';
 import validator from 'validator';
 
-import { addNewEmployee } from '../../redux';
+import { addNewEmployee, setLoadingOn, setLoadingOff } from '../../redux';
+import { methods } from '../../utils';
 
 const useAddEmployee = (setAddEmployee) => {
   const dispatch = useDispatch();
@@ -15,15 +17,56 @@ const useAddEmployee = (setAddEmployee) => {
   const [civilStatus, setCivilStatus] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [formValidated, setFormValidated] = useState(false);
-  const [error, setError] = useState('');
+  const [clientError, setClientError] = useState('');
   const [employeeInfo, setEmployeeInfo] = useState({});
+
+  const [addEmployee, { loading, data, error }] = useMutation(
+    methods.addEmployee
+  );
+
+  useEffect(() => {
+    if (loading) {
+      dispatch(setLoadingOn());
+    } else {
+      dispatch(setLoadingOff());
+    }
+
+    if (error) {
+      console.error(error);
+    }
+
+    if (data && !error) {
+      dispatch(addNewEmployee(data.addNewEmployee));
+    }
+  }, [loading, data, error, dispatch]);
 
   useEffect(() => {
     if (formValidated) {
+      addEmployee({
+        variables: {
+          input: {
+            id: employeeInfo.id,
+            name: employeeInfo.name,
+            lastName: employeeInfo.lastName,
+            email: employeeInfo.email,
+            nationality: employeeInfo.nationality,
+            phone: employeeInfo.phone,
+            civilStatus: employeeInfo.civilStatus,
+            birthday: employeeInfo.birthday,
+          },
+        },
+      });
       setAddEmployee(false);
-      dispatch(addNewEmployee(employeeInfo));
+      setFormValidated(false);
+      setName('');
+      setLastName('');
+      setEmail('');
+      setNationality('');
+      setPhone('');
+      setCivilStatus('');
+      setSelectedDate(new Date());
     }
-  }, [formValidated, setAddEmployee, employeeInfo, dispatch]);
+  }, [formValidated, setAddEmployee, employeeInfo, addEmployee]);
 
   const getFormattedDate = (date) => {
     var year = date.getFullYear();
@@ -48,37 +91,37 @@ const useAddEmployee = (setAddEmployee) => {
   const handleAddEmployee = () => {
     if (name.trim().length < 4) {
       setFormValidated(false);
-      setError('Name too short.');
+      setClientError('Name too short.');
       return;
     }
 
     if (lastName.trim().length < 4) {
       setFormValidated(false);
-      setError('Last name too short.');
+      setClientError('Last name too short.');
       return;
     }
 
     if (!validator.isEmail(email.trim())) {
       setFormValidated(false);
-      setError('Invalid email.');
+      setClientError('Invalid email.');
       return;
     }
 
     if (nationality.trim() === '') {
       setFormValidated(false);
-      setError('Please add a nationality.');
+      setClientError('Please add a nationality.');
       return;
     }
 
     if (phone.trim().length < 8) {
       setFormValidated(false);
-      setError('Invalid phone number.');
+      setClientError('Invalid phone number.');
       return;
     }
 
     if (civilStatus.trim() === '') {
       setFormValidated(false);
-      setError('Please add civil status.');
+      setClientError('Please add civil status.');
       return;
     }
     const birthday = getFormattedDate(selectedDate);
@@ -94,7 +137,7 @@ const useAddEmployee = (setAddEmployee) => {
       civilStatus,
       birthday,
     });
-    setError('');
+    setClientError('');
   };
 
   return [
@@ -113,7 +156,7 @@ const useAddEmployee = (setAddEmployee) => {
     handleCivilStatus,
     handleDateChange,
     handleAddEmployee,
-    error,
+    clientError,
   ];
 };
 

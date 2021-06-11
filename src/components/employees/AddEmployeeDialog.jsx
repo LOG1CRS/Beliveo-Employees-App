@@ -43,7 +43,7 @@ const AddEmployeeDialog = (props) => {
     handleCivilStatus,
     handleDateChange,
     handleAddEmployee,
-    error,
+    clientError,
   ] = useAddEmployee(setAddEmployee);
 
   return (
@@ -59,9 +59,13 @@ const AddEmployeeDialog = (props) => {
       <DialogContent>
         <Grid container>
           <Grid item xs={12}>
-            {error !== '' ? (
-              <Typography variant="h3" className={classes.error} align="center">
-                {error}
+            {clientError !== '' ? (
+              <Typography
+                variant="h3"
+                className={classes.clientError}
+                align="center"
+              >
+                {clientError}
               </Typography>
             ) : null}
           </Grid>
@@ -222,7 +226,7 @@ const useStyle = makeStyles((theme) => ({
       fontSize: 30,
     },
   },
-  error: {
+  clientError: {
     fontSize: 16,
     color: 'red',
     marginBottom: 5,

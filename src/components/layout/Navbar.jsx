@@ -22,12 +22,9 @@ const Navbar = (props) => {
   const user = useSelector((store) => store.user);
 
   const getUserName = () => {
-    if (!user.name) {
-      const name = user.email.split('@');
-      return name[0];
-    } else {
-      return user.name;
-    }
+    const names = user.name.split(' ');
+
+    return names[0];
   };
 
   return (

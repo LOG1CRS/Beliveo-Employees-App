@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^12.8.3",
     "concurrently": "^6.2.0",
     "date-fns": "^2.22.1",
+    "dotenv": "^8.2.0",
     "graphql": "^15.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -30,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "server": "cd gql_server && npm run dev",
-    "project-dev": "concurrently \"npm start\" \"npm run server\"",
+    "project": "concurrently \"npm start\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

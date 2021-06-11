@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useMutation } from '@apollo/client';
 import validator from 'validator';
 
-import { updateEmployee, removeEmployee } from '../../redux';
+import { updateEmployee, setLoadingOn, setLoadingOff } from '../../redux';
+import { methods } from '../../utils';
 
 const useEditEmployee = (setEmployeeDialog) => {
   const employeeSelected = useSelector((store) => store.employeeSelected);
@@ -13,9 +15,29 @@ const useEditEmployee = (setEmployeeDialog) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [formValidated, setFormValidated] = useState(false);
-  const [error, setError] = useState('');
+  const [clientError, setClientError] = useState('');
   const [activeSave, setActiveSave] = useState(false);
   const [editedEmployeeInfo, setEditedEmployeeInfo] = useState({});
+
+  const [editEmployee, { loading, data, error }] = useMutation(
+    methods.editEmployee
+  );
+
+  useEffect(() => {
+    if (loading) {
+      dispatch(setLoadingOn());
+    } else {
+      dispatch(setLoadingOff());
+    }
+
+    if (error) {
+      console.error(error);
+    }
+
+    if (data && !error) {
+      dispatch(updateEmployee(data.editEmployee.id, data.editEmployee));
+    }
+  }, [loading, data, error, dispatch, editedEmployeeInfo]);
 
   useEffect(() => {
     setName(employeeSelected?.name);
@@ -39,33 +61,53 @@ const useEditEmployee = (setEmployeeDialog) => {
 
   useEffect(() => {
     if (formValidated) {
+      editEmployee({
+        variables: {
+          input: {
+            id: editedEmployeeInfo.id,
+            name: editedEmployeeInfo.name,
+            lastName: editedEmployeeInfo.lastName,
+            email: editedEmployeeInfo.email,
+            nationality: employeeSelected.nationality,
+            phone: editedEmployeeInfo.phone,
+            civilStatus: employeeSelected.civilStatus,
+            birthday: employeeSelected.birthday,
+          },
+        },
+      });
       setEmployeeDialog(false);
-      dispatch(updateEmployee(editedEmployeeInfo.id, editedEmployeeInfo));
+      setFormValidated(false);
     }
-  }, [formValidated, setEmployeeDialog, editedEmployeeInfo, dispatch]);
+  }, [
+    formValidated,
+    setEmployeeDialog,
+    editedEmployeeInfo,
+    employeeSelected,
+    editEmployee,
+  ]);
 
   const handleEditEmployee = () => {
     if (name.trim().length < 4) {
       setFormValidated(false);
-      setError('Name too short.');
+      setClientError('Name too short.');
       return;
     }
 
     if (lastName.trim().length < 4) {
       setFormValidated(false);
-      setError('Last name too short.');
+      setClientError('Last name too short.');
       return;
     }
 
     if (!validator.isEmail(email.trim())) {
       setFormValidated(false);
-      setError('Invalid email.');
+      setClientError('Invalid email.');
       return;
     }
 
     if (phone.trim().length < 8) {
       setFormValidated(false);
-      setError('Invalid phone number.');
+      setClientError('Invalid phone number.');
       return;
     }
 
@@ -77,19 +119,7 @@ const useEditEmployee = (setEmployeeDialog) => {
       email,
       phone,
     });
-    setError('');
-  };
-
-  const handleDeleteEmployee = () => {
-    const deleting = window.confirm(
-      `Are you sure to delete ${employeeSelected.name} employee?`
-    );
-    if (!deleting) {
-      return;
-    }
-
-    dispatch(removeEmployee(employeeSelected.id));
-    setEmployeeDialog(false);
+    setClientError('');
   };
 
   return [
@@ -102,8 +132,7 @@ const useEditEmployee = (setEmployeeDialog) => {
     phone,
     setPhone,
     handleEditEmployee,
-    handleDeleteEmployee,
-    error,
+    clientError,
     activeSave,
   ];
 };

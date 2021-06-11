@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
-import { useEditEmployee } from '../../hooks';
+import { useEditEmployee, useDeleteEmployee } from '../../hooks';
 
 const EmployeeDialog = (props) => {
   const { employeeDialog, setEmployeeDialog } = props;
@@ -31,10 +31,11 @@ const EmployeeDialog = (props) => {
     phone,
     setPhone,
     handleEditEmployee,
-    handleDeleteEmployee,
-    error,
+    clientError,
     activeSave,
   ] = useEditEmployee(setEmployeeDialog);
+
+  const [handleDeleteEmployee] = useDeleteEmployee(setEmployeeDialog);
 
   return (
     <Dialog
@@ -54,9 +55,13 @@ const EmployeeDialog = (props) => {
       <DialogContent>
         <Grid container>
           <Grid item xs={12}>
-            {error !== '' ? (
-              <Typography variant="h3" className={classes.error} align="center">
-                {error}
+            {clientError !== '' ? (
+              <Typography
+                variant="h3"
+                className={classes.clientError}
+                align="center"
+              >
+                {clientError}
               </Typography>
             ) : null}
           </Grid>
@@ -232,7 +237,7 @@ const useStyle = makeStyles((theme) => ({
     fontSize: 32,
     marginTop: 30,
   },
-  error: {
+  clientError: {
     fontSize: 16,
     color: 'red',
     marginBottom: 5,

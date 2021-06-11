@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
-import {
-  Grid,
-  makeStyles,
-  Button,
-  // Hidden,
-  Typography,
-} from '@material-ui/core';
+import { Grid, makeStyles, Button, Typography } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 
 import {
-  // SearchBar,
   EmployeesList,
   HelpPopover,
   AddEmployeeDialog,
   EmployeeDialog,
 } from '../components';
+import { useUpdateEmployees } from '../hooks';
 
 const Employees = () => {
   const classes = useStyle();
   const [addEmployee, setAddEmployee] = useState(false);
   const [employeeDialog, setEmployeeDialog] = useState(false);
+
+  useUpdateEmployees();
 
   return (
     <>
@@ -46,58 +42,9 @@ const Employees = () => {
             </Button>
           </Grid>
         </Grid>
-        {/* <Grid item xs={12} className={classes.searchContainer}>
-          <SearchBar />
-        </Grid> */}
         <Grid item xs={12} className={classes.employeesContainer}>
           <EmployeesList setEmployeeDialog={setEmployeeDialog} />
         </Grid>
-        {/* <Grid item xs={12} className={classes.buttonsContainer}>
-          <Hidden only="xs">
-            <Button
-              variant="outlined"
-              color="secondary"
-              size="large"
-              className={classes.resetButton}
-            >
-              Reset Filter
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              size="large"
-              className={classes.searchButton}
-            >
-              Search
-            </Button>
-          </Hidden>
-          <Hidden smUp>
-            <Grid container>
-              <Grid item xs={12}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  size="large"
-                  fullWidth
-                  className={classes.resetButton}
-                >
-                  Reset Filter
-                </Button>
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  size="large"
-                  fullWidth
-                  className={classes.searchButton}
-                >
-                  Search
-                </Button>
-              </Grid>
-            </Grid>
-          </Hidden>
-        </Grid> */}
       </Grid>
       <AddEmployeeDialog
         addEmployee={addEmployee}

@@ -54,9 +54,9 @@ let users = [
     name: 'Fernanda',
     lastName: 'Torres Rodríguez',
     email: 'fernanda@beliveo.com',
-    nationality: 'Test nationality',
+    nationality: 'Mexican',
     phone: '1234567891',
-    civilStatus: 'Test status',
+    civilStatus: 'Single',
     birthday: '12/02/1991',
   },
   {

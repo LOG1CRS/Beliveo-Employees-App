@@ -19,3 +19,54 @@ export const login = gql`
     }
   }
 `;
+
+export const getEmployees = gql`
+  query {
+    getEmployees {
+      id
+      name
+      lastName
+      email
+      nationality
+      phone
+      civilStatus
+      birthday
+    }
+  }
+`;
+
+export const addEmployee = gql`
+  mutation addEmployee($input: EmployeeInput!) {
+    addNewEmployee(employeeInput: $input) {
+      id
+      name
+      lastName
+      email
+      nationality
+      phone
+      civilStatus
+      birthday
+    }
+  }
+`;
+
+export const editEmployee = gql`
+  mutation editAnEmployee($input: EmployeeInput!) {
+    editEmployee(employeeInput: $input) {
+      id
+      name
+      lastName
+      email
+      nationality
+      phone
+      civilStatus
+      birthday
+    }
+  }
+`;
+
+export const deleteEmployee = gql`
+  mutation deleteAnEmployee($id: Int!) {
+    deleteEmployee(id: $id)
+  }
+`;
