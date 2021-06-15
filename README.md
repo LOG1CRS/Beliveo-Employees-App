@@ -27,6 +27,10 @@ This repo is React challenge code for Beliveo.
 
     cd server && npm install
 
+**Add a .env.local file in the root with your own values**
+
+    REACT_APP_URL_SERVER = <>
+
 **Add a .env file in the server folder with your own values**
 
     Port = <>
