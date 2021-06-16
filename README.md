@@ -49,7 +49,7 @@ Runs the client in the development mode.
 
 Runs the server in the development mode.
 
-### `npm run project-dev`
+### `npm run project`
 
 Runs both the client and the server concurrently.
 
